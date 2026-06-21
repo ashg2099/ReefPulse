@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+reef_vectorstore/
+reef_memory.db
+cache/
