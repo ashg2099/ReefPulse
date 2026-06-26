@@ -1,7 +1,9 @@
-.env
 __pycache__/
 *.pyc
+*.pyo
+.env
+chroma_db/
+data/
+*.egg-info/
 .venv/
-reef_vectorstore/
-reef_memory.db
-cache/
+.DS_Store

@@ -1,26 +1,131 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Light mode tokens ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-page:     #f0f9ff;
+  --bg-card:     #ffffff;
+  --bg-section:  #fafeff;
+  --bg-muted:    #f0f9ff;
+  --border:      #e0f2fe;
+
+  --text-primary:   #0c4a6e;
+  --text-secondary: #0369a1;
+  --text-muted:     #64748b;
+  --text-subtle:    #94a3b8;
+
+  --accent:        #0284c7;
+  --accent-hover:  #0369a1;
+  --accent-bg:     #e0f2fe;
+  --accent-border: #bae6fd;
+
+  --chip-bg:     #ecfeff;
+  --chip-color:  #0369a1;
+  --chip-border: #a5f3fc;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Dark mode tokens ── */
+html.dark {
+  --bg-page:     #020817;
+  --bg-card:     #0f172a;
+  --bg-section:  #0a1628;
+  --bg-muted:    #111827;
+  --border:      #1e3a5f;
+
+  --text-primary:   #e2e8f0;
+  --text-secondary: #7dd3fc;
+  --text-muted:     #94a3b8;
+  --text-subtle:    #475569;
+
+  --accent:        #38bdf8;
+  --accent-hover:  #7dd3fc;
+  --accent-bg:     #0c2d48;
+  --accent-border: #164e63;
+
+  --chip-bg:     #0c2d48;
+  --chip-color:  #38bdf8;
+  --chip-border: #164e63;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Gradient border card ── */
+/* Works by painting a gradient as the border-box background,
+   then painting the card's own bg on top as padding-box.      */
+.g-card {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    linear-gradient(135deg, rgba(56,189,248,.55) 0%, rgba(129,140,248,.4) 100%) border-box;
+  border-radius: 16px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
+.g-card:hover {
+  box-shadow: 0 8px 32px rgba(2,132,199,.12), 0 0 0 1px rgba(56,189,248,.2);
+  transform: translateY(-2px);
+}
+html.dark .g-card {
+  background:
+    linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    linear-gradient(135deg, rgba(56,189,248,.25) 0%, rgba(129,140,248,.2) 100%) border-box;
+}
+html.dark .g-card:hover {
+  box-shadow: 0 8px 32px rgba(56,189,248,.08), 0 0 0 1px rgba(56,189,248,.15);
+}
+
+/* ── Monospace data values ── */
+.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* ── Animations ── */
+@keyframes wave         { 0%   { transform: translateX(0);     } 100% { transform: translateX(-50%); } }
+@keyframes wave-reverse { 0%   { transform: translateX(-50%);  } 100% { transform: translateX(0);    } }
+@keyframes coral-sway   { 0%, 100% { transform: rotate(-3deg); } 50%  { transform: rotate(3deg);     } }
+@keyframes coral-sway-r { 0%, 100% { transform: rotate(3deg);  } 50%  { transform: rotate(-3deg);    } }
+@keyframes fish-swim    { 0%   { transform: translateX(110vw);              } 100% { transform: translateX(-20vw);             } }
+@keyframes fish-swim-r  { 0%   { transform: translateX(-20vw) scaleX(-1);  } 100% { transform: translateX(110vw) scaleX(-1);  } }
+@keyframes bubble-rise  { 0%   { transform: translateY(0);     opacity: 0.7; } 100% { transform: translateY(-80px); opacity: 0; } }
+@keyframes pulse-ring   { 0%   { transform: scale(1);   opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes bar-grow     { from { width: 0; } to { width: var(--bar-w); } }
+@keyframes count-up     { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-in-up   { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scan-line    { 0%   { top: 0%;   } 100% { top: 100%; } }
+@keyframes value-flash  { 0%   { background: rgba(56,189,248,.18); } 100% { background: transparent; } }
+
+/* Aurora blob drift */
+@keyframes aurora-1 {
+  0%, 100% { transform: translate(0, 0)    scale(1);    }
+  50%       { transform: translate(40px,-25px) scale(1.1); }
+}
+@keyframes aurora-2 {
+  0%, 100% { transform: translate(0, 0)    scale(1);    }
+  50%       { transform: translate(-25px,35px) scale(0.95); }
+}
+
+button { transition: all 0.15s ease; }
+
+/* ── Skeleton shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--accent-bg) 25%,
+    color-mix(in srgb, var(--accent-bg) 60%, white) 50%,
+    var(--accent-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
