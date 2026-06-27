@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useReefStore } from '@/lib/store'
 import type { Tab } from '@/lib/store'
 
-const TABS: Tab[] = ['Overview', 'Forecast', 'History', 'Alerts']
+const TABS: Tab[] = ['Overview', 'Forecast', 'History', 'Alerts', 'Species']
 
 export default function Navbar() {
   const { isDark, toggleDark, activeTab, setActiveTab } = useReefStore()

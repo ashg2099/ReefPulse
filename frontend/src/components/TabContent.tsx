@@ -9,6 +9,7 @@ import MarineSection from './MarineSection'
 import RightPanel from './RightPanel'
 import ForecastPage from './ForecastPage'
 import HistoryPage from './HistoryPage'
+import SpeciesRiskPage from './SpeciesRiskPage'
 
 function OverviewContent() {
   return (
@@ -61,5 +62,6 @@ export default function TabContent() {
   if (activeTab === 'Forecast') return <ForecastPage />
   if (activeTab === 'History')  return <HistoryPage />
   if (activeTab === 'Alerts')   return <ComingSoon tab="Alerts" />
+  if (activeTab === 'Species') return <SpeciesRiskPage />
   return <OverviewContent />
 }

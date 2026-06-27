@@ -28,6 +28,7 @@ import time
 from routers.model    import router as model_router
 from routers.forecast import router as forecast_router
 from routers.history import router as history_router
+from routers.species import router as species_router
 
 # App 
 app = FastAPI(
@@ -48,6 +49,7 @@ app.add_middleware(
 app.include_router(model_router)
 app.include_router(forecast_router)
 app.include_router(history_router)
+app.include_router(species_router)
 
 # In-memory job store
 jobs = {}
