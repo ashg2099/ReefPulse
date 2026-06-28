@@ -20,8 +20,8 @@ export default function SpeciesRiskPage() {
     staleTime: 60_000,
   })
 
-  const sst = forecastQ.data?.current_sst ?? null
-  const dhw = forecastQ.data?.current_dhw ?? null
+  const sst = forecastQ.data?.current?.sst ?? null
+  const dhw = forecastQ.data?.current?.dhw ?? null
 
   const speciesQ = useQuery({
     queryKey: ['species-risk', lat, lon, sst, dhw],
