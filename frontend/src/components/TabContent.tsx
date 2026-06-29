@@ -10,6 +10,7 @@ import RightPanel from './RightPanel'
 import ForecastPage from './ForecastPage'
 import HistoryPage from './HistoryPage'
 import SpeciesRiskPage from './SpeciesRiskPage'
+import AlertsPage from './AlertsPage'
 
 function OverviewContent() {
   return (
@@ -61,7 +62,7 @@ export default function TabContent() {
   const { activeTab } = useReefStore()
   if (activeTab === 'Forecast') return <ForecastPage />
   if (activeTab === 'History')  return <HistoryPage />
-  if (activeTab === 'Alerts')   return <ComingSoon tab="Alerts" />
+  if (activeTab === 'Alerts') return <AlertsPage />
   if (activeTab === 'Species') return <SpeciesRiskPage />
   return <OverviewContent />
 }
