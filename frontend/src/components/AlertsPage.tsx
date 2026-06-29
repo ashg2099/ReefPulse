@@ -25,7 +25,7 @@ export default function AlertsPage() {
     current?.level === 3 ? 'linear-gradient(135deg, #7f1d1d, #991b1b)' :
     current?.level === 2 ? 'linear-gradient(135deg, #7c2d12, #9a3412)' :
     current?.level === 1 ? 'linear-gradient(135deg, #78350f, #92400e)' :
-    'linear-gradient(135deg, #14532d, #15803d)'
+    'linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%)'
 
   const heroIcon =
     current?.level === 3 ? '🚨' :
